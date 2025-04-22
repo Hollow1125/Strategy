@@ -72,23 +72,7 @@ private:
     string name;
     double NumberOfSpeakers;
     BirthTime *BirthCentury;
-
-protected:
-    bool WidelySpoken;
-    bool HasAlphabet;
-
-public:
-    Languages(LangRegion reg, string name, double NumberOfSpeakers, bool WidelySpoken, bool HasAlphabet) : region(reg),  name(name), NumberOfSpeakers(NumberOfSpeakers), WidelySpoken(WidelySpoken), HasAlphabet(HasAlphabet), BirthCentury(nullptr) {}
-    virtual ~Languages()
-    {
-        if(BirthCentury != nullptr) delete BirthCentury;
-    }
-
-    bool IsWidelySpoken() const { return WidelySpoken; }
-    LangRegion GetSpeakers() const { return region; }
-    bool Alphabet() const { return HasAlphabet; }
-
-    virtual void showInfo()
+    void DoShowInfo()
     {
         if(BirthCentury == nullptr)
         {
@@ -101,6 +85,27 @@ public:
             BirthCentury->showInfo();
             cout << endl;
         }
+    };
+
+protected:
+    bool WidelySpoken;
+    bool HasAlphabet;
+
+public:
+    Languages(LangRegion reg, string name, double NumberOfSpeakers, bool WidelySpoken, bool HasAlphabet) : region(reg),  name(name), NumberOfSpeakers(NumberOfSpeakers),
+    WidelySpoken(WidelySpoken), HasAlphabet(HasAlphabet), BirthCentury(nullptr) {}
+    virtual ~Languages()
+    {
+        if(BirthCentury != nullptr) delete BirthCentury;
+    }
+
+    bool IsWidelySpoken() const { return WidelySpoken; }
+    LangRegion GetSpeakers() const { return region; }
+    bool Alphabet() const { return HasAlphabet; }
+
+    void showInfo()
+    {
+        DoShowInfo();
     }
 
     void DetermineBirthCentury(BirthTime *Create) { BirthCentury = Create; }
